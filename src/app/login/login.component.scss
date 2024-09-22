@@ -1,0 +1,22 @@
+.login-card {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .login-form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .login-button {
+    width: 100%;
+    margin-top: 20px;
+  }
+  
+  mat-form-field {
+    width: 100%;
+    margin-bottom: 16px;
+  }
+  

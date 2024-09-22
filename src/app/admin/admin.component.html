@@ -1,0 +1,60 @@
+
+<!-- Doctor List -->
+<mat-card class="dashboard-card">
+
+  <mat-card-title>Doctors List</mat-card-title>
+  <table mat-table [dataSource]="doctors" class="mat-elevation-z8">
+
+    <!-- ID Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef> ID </th>
+      <td mat-cell *matCellDef="let doctor"> {{doctor.id}} </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let doctor"> {{doctor.name}} </td>
+    </ng-container>
+
+    <!-- Specialization Column -->
+    <ng-container matColumnDef="specialization">
+      <th mat-header-cell *matHeaderCellDef> Specialization </th>
+      <td mat-cell *matCellDef="let doctor"> {{doctor.specialization}} </td>
+    </ng-container>
+
+    <!-- Actions Column -->
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef> Actions </th>
+      <td mat-cell *matCellDef="let doctor">
+        <button mat-button color="primary" (click)="editDoctor(doctor)">Edit</button>
+        <button mat-button color="warn" (click)="deleteDoctor(doctor.id)">Delete</button>
+      </td>
+    </ng-container>
+
+    <!-- Table Header and Rows -->
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</mat-card>
+
+<!-- Form to Add/Edit Doctor -->
+<mat-card class="dashboard-card">
+  <mat-card-title>{{ isEditing ? 'Edit Doctor' : 'Add Doctor' }}</mat-card-title>
+  <form (ngSubmit)="isEditing ? updateDoctor() : addDoctor()">
+    <mat-form-field appearance="fill">
+      <mat-label>Name</mat-label>
+      <input matInput [(ngModel)]="newDoctor.name" name="name" required>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Specialization</mat-label>
+      <input matInput [(ngModel)]="newDoctor.specialization" name="specialization" required>
+    </mat-form-field>
+
+    <div class="form-actions">
+      <button mat-raised-button color="primary" type="submit">{{ isEditing ? 'Update' : 'Add' }}</button>
+      <button mat-raised-button color="warn" *ngIf="isEditing" type="button" (click)="cancelEdit()">Cancel</button>
+    </div>
+  </form>
+</mat-card>
